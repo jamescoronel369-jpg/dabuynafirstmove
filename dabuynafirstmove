@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Vibe Check For You 💚🌿</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+        .card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.15);
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            border: 1px solid #d0e1d4;
+        }
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 5px;
+            font-size: 22px;
+        }
+        p.subtitle {
+            font-size: 13px;
+            color: #558b2f;
+            margin-bottom: 20px;
+        }
+        .warning-note {
+            background: #f1f8e9;
+            color: #33691e;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid #dcedc8;
+        }
+        .question-box {
+            margin-bottom: 18px;
+            text-align: left;
+            background: #f4f9f4;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border-left: 4px solid #4caf50;
+        }
+        .question-box label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .options label {
+            font-weight: normal;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            font-size: 13px;
+            box-sizing: border-box;
+            margin-top: 5px;
+            outline: none;
+            background: #ffffff;
+        }
+        input[type="date"]:focus, input[type="time"]:focus {
+            border-color: #4caf50;
+        }
+        .q4-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 5px;
+        }
+        .q4-option-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        #noOptionContainer {
+            position: relative;
+            display: inline-block;
+            transition: 0.1s ease;
+        }
+        .yes-details {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            border: 1px solid #a5d6a7;
+        }
+        .sad-frog-box {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #ffebee;
+            border-radius: 8px;
+            border: 1px solid #ffcdd2;
+            color: #c62828;
+            text-align: center;
+        }
+        button.submit-btn {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            font-weight: bold;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+        }
+        button.submit-btn:hover {
+            background-color: #388e3c;
+        }
+        #result {
+            display: none;
+            margin-top: 15px;
+            padding: 20px;
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 10px;
+            color: #1b5e20;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+        }
+        .frog-container {
+            font-size: 50px;
+            margin: 15px 0;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+        .heart-float {
+            color: #2e7d32;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .copy-btn {
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 12px;
+            transition: background 0.3s;
+        }
+        .copy-btn:hover {
+            background-color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>A Little Vibe Check For You ☘️💚</h2>
+        <p class="subtitle">Answer freely, no pressure at all!</p>
+        
+        <div class="warning-note">
+            ⚠️ <b>Note:</b> After submitting, you can easily copy your answers and send them to him! 🌿
+        </div>
+
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question-box">
+                <label>1. Where do you want to go when you are no longer busy?</label>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="Park" required> Park 🌳</label>
+                    <label><input type="radio" name="q1" value="Cafe"> Cafe ☕</label>
+                    <label><input type="radio" name="q1" value="Simbahan"> Simbahan ⛪</label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-box">
+                <label>2. What was your first impression of the person who sent you this? 👀</label>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="Kind and approachable" required> Kind and approachable 🌿</label>
+                    <label><input type="radio" name="q2" value="A little mysterious and cute"> A little mysterious and cute 🍃</label>
+                    <label><input type="radio" name="q2" value="Funny and lowkey charming"> Funny and lowkey charming ☘️</label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-box">
+                <label>3. Is it okay for you to get to know someone new like him? 🤝</label>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="Yes, absolutely!" required> Yes, absolutely! 💚</label>
+                    <label><input type="radio" name="q3" value="Sure, as long as it's fun and chill"> Sure, as long he is serious 🍃</label>
+                    <label><input type="radio" name="q3" value="Let's see where things go"> Let's see the situation 🌱</label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-box">
+                <label>4. If given the chance, may I walk or drive you home safely?</label>
+                <div class="q4-btn-group">
+                    <label class="q4-option-row">
+                        <input type="radio" name="q4" value="Yes!" onclick="toggleDateInputs(true)" required> Yes! 💚
+                    </label>
+                    <label class="q4-option-row">
+                        <input type="radio" name="q4" value="Maybe, you do it often" onclick="toggleDateInputs(false)"> Maybe, you do it often 😉🌿
+                    </label>
+                    <div id="noOptionContainer" onmouseover="moveNo()" ontouchstart="moveNo()" onclick="moveNo()">
+                        <label class="q4-option-row" style="cursor: pointer;">
+                            <input type="radio" name="q4" value="Maybe next time" onclick="toggleDateInputs(false)"> Maybe send me a message if you want too🍃
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="yesDetails" class="yes-details">
+                    <div class="heart-float">💚 🌿 Yay! When are you free? 🌿 💚</div>
+                    <label style="font-size: 12px; color: #558b2f; margin-top: 4px; margin-bottom: 0;">Select Date:</label>
+                    <input type="date" name="q4_date" id="q4Date">
+                    
+                    <label style="font-size: 12px; color: #558b2f; margin-top: 6px; margin-bottom: 0;">Select Time:</label>
+                    <input type="time" name="q4_time" id="q4Time">
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-box">
+                <label>5. What kind of sweet gesture from a guy melts your heart the most? 🤍</label>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="Remembering small random details about you" required> Remembering small random details about me 🪷</label>
+                    <label><input type="radio" name="q5" value="Checking up on you throughout the day"> Checking up on me throughout the day 🌿</label>
+                    <label><input type="radio" name="q5" value="Making you smile when you are stressed"> Making me smile when I stresses💚</label>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question-box">
+                <label>6. If someone has a crush on you, what do they need to do to win your heart? ✨</label>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="Show genuine effort and consistency" required> Show genuine effort and consistency 🌱</label>
+                    <label><input type="radio" name="q6" value="Make you laugh and vibe with your humor"> Make me laugh and vibe with my humor 🍃</label>
+                    <label><input type="radio" name="q6" value="Be patient and respectful"> Be patient and respectful to me 💚</label>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question-box">
+                <label>7. If you could choose a dream spot for a surprise hangout, where would it be? 🗺️</label>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="A cozy cafe with great pastries and coffee" required> A cozy cafe with great pastries and coffee 🌿</label>
+                    <label><input type="radio" name="q7" value="A peaceful park to watch the sunset"> A peaceful park to watch the sunset ☘️</label>
+                    <label><input type="radio" name="q7" value="A quiet spot for late-night talks"> A quiet spot for late-night talks 🍃</label>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question-box">
+                <label>8. What is your ultimate green flag when dealing with someone? 💚</label>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="He is emotionally mature and honest" required> He is emotionally mature and honest 🌿</label>
+                    <label><input type="radio" name="q8" value="He makes you feel completely safe and valued"> He makes me feel completely safe and valued 🪷</label>
+                    <label><input type="radio" name="q8" value="He listens attentively when you talk"> He listens attentively when i talk 💚</label>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question-box">
+                <label>9. What are your favorite things to do or what makes you the happiest? 🌸</label>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="Listening to music and discovering peaceful places" required> Listening to music and discovering peaceful places 🌿</label>
+                    <label><input type="radio" name="q9" value="Enjoying good food and cozy moments"> Enjoying good food and cozy moments 🍃</label>
+                    <label><input type="radio" name="q9" value="Spending time with someone who brings peace to my heart"> Spending time with someone who brings peace to my heart 💚</label>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question-box">
+                <label>10. Are you ready to give this connection a sweet little chance? 💌</label>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="Yes, let's see where this goes!" required> Yes, let's see where this goes! 💚</label>
+                    <label><input type="radio" name="q10" value="Definitely, excited for what's next"> Definitely, excited for what's next 🫶🌱</label>
+                    <label><input type="radio" name="q10" value="Let's take it slow and enjoy the vibe"> Let's me see if it's genuinely💚🍀</label>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question-box">
+                <label>11. If I ask you out on a date or some gala, would you say yes? 🌹✨</label>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="Yes!" onclick="toggleQ11Details('yes')" required> Yes, I'd love to! 💚</label>
+                    <label><input type="radio" name="q11" value="No..." onclick="toggleQ11Details('no')"> No... 🍃</label>
+                </div>
+
+                <div id="q11YesDetails" class="yes-details">
+                    <div class="heart-float">💚 🌿 Woohoo! Pick a date & time when you're free: 🌿 💚</div>
+                    <label style="font-size: 12px; color: #558b2f; margin-top: 4px; margin-bottom: 0;">Select Date:</label>
+                    <input type="date" name="q11_date" id="q11Date">
+                    
+                    <label style="font-size: 12px; color: #558b2f; margin-top: 6px; margin-bottom: 0;">Select Time:</label>
+                    <input type="time" name="q11_time" id="q11Time">
+                </div>
+
+                <div id="q11NoDetails" class="sad-frog-box">
+                    <div style="font-size: 35px;">🐸💔🥺</div>
+                    <span style="font-size: 13px; font-weight: bold;">Oh no... the sad frog is heartbroken!</span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit My Answers! 🌿💚</button>
+        </form>
+
+        <div id="result">
+            <div class="frog-container">🐸💚</div>
+            Yay, thank you for answering! Click the button below to copy your answers and send them over! 😉✨
+            <br>
+            <button class="copy-btn" onclick="copyAnswers()">📋 Copy My Answers</button>
+        </div>
+    </div>
+
+    <script>
+        let formattedAnswers = "";
+
+        function toggleDateInputs(show) {
+            const yesDetails = document.getElementById('yesDetails');
+            const q4Date = document.getElementById('q4Date');
+            const q4Time = document.getElementById('q4Time');
+            
+            if (show) {
+                yesDetails.style.display = 'block';
+                q4Date.required = true;
+                q4Time.required = true;
+            } else {
+                yesDetails.style.display = 'none';
+                q4Date.required = false;
+                q4Time.required = false;
+                q4Date.value = '';
+                q4Time.value = '';
+            }
+        }
+
+        function toggleQ11Details(choice) {
+            const yesDiv = document.getElementById('q11YesDetails');
+            const noDiv = document.getElementById('q11NoDetails');
+            const dateIn = document.getElementById('q11Date');
+            const timeIn = document.getElementById('q11Time');
+
+            if (choice === 'yes') {
+                yesDiv.style.display = 'block';
+                noDiv.style.display = 'none';
+                dateIn.required = true;
+                timeIn.required = true;
+            } else {
+                yesDiv.style.display = 'none';
+                noDiv.style.display = 'block';
+                dateIn.required = false;
+                timeIn.required = false;
+                dateIn.value = '';
+                timeIn.value = '';
+            }
+        }
+
+        function moveNo() {
+            const noContainer = document.getElementById('noOptionContainer');
+            const x = Math.random() * 160 - 80;
+            const y = Math.random() * 50 - 25;
+            noContainer.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const q1 = document.querySelector('input[name="q1"]:checked').value;
+            const q2 = document.querySelector('input[name="q2"]:checked').value;
+            const q3 = document.querySelector('input[name="q3"]:checked').value;
+            const q4Choice = document.querySelector('input[name="q4"]:checked').value;
+            
+            let q4Final = q4Choice;
+            if(q4Choice === 'Yes!') {
+                const q4Date = document.getElementById('q4Date').value || 'N/A';
+                const q4Time = document.getElementById('q4Time').value || 'N/A';
+                q4Final = `Yes! (Date: ${q4Date}, Time: ${q4Time})`;
+            }
+
+            const q5 = document.querySelector('input[name="q5"]:checked').value;
+            const q6 = document.querySelector('input[name="q6"]:checked').value;
+            const q7 = document.querySelector('input[name="q7"]:checked').value;
+            const q8 = document.querySelector('input[name="q8"]:checked').value;
+            const q9 = document.querySelector('input[name="q9"]:checked').value;
+            const q10 = document.querySelector('input[name="q10"]:checked').value;
+
+            const q11Choice = document.querySelector('input[name="q11"]:checked').value;
+            let q11Final = q11Choice;
+            if(q11Choice === 'Yes!') {
+                const q11Date = document.getElementById('q11Date').value || 'N/A';
+                const q11Time = document.getElementById('q11Time').value || 'N/A';
+                q11Final = `Yes! (Date: ${q11Date}, Time: ${q11Time})`;
+            } else {
+                q11Final = `No... 🐸💔`;
+            }
+
+            formattedAnswers = `Hi! Here are my Vibe Check answers: 🌿💚\n\n1. Where to go: ${q1}\n2. First impression: ${q2}\n3. Getting to know him: ${q3}\n4. Drive/Walk home: ${q4Final}\n5. Heart-melting gesture: ${q5}\n6. How to win her heart: ${q6}\n7. Dream hangout spot: ${q7}\n8. Ultimate green flag: ${q8}\n9. Favorite things & happiness: ${q9}\n10. Chance for connection: ${q10}\n11. Go on a date: ${q11Final}\n\nProcessed via Vibe Check Quiz! 🐸💚`;
+
+            document.getElementById('quizForm').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+        });
+
+        function copyAnswers() {
+            navigator.clipboard.writeText(formattedAnswers).then(function() {
+                alert('Copied successfully! Pwede mo na siyang i-paste sa Messenger nya🫶🍀! 💌');
+            }, function(err) {
+                alert('Failed to copy. Pwede mong i-screenshot nalang!');
+            });
+        }
+    </script>
+
+</body>
+</html>
